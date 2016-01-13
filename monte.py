@@ -6,8 +6,10 @@
 import tellurium as te
 import roadrunner
 import random
-import pylab as pl
-import winsound
+import matplotlib.pyplot as plt
+import pylab
+import numpy as np
+import time
 
 r = te.loada("""
    J1: $Xo -> S1;  (k1*Xo - k1/Keq1*S1);
@@ -28,6 +30,8 @@ r = te.loada("""
      n = 6
 """)
 
+np.random.seed(int(time.time()))
+
 m = r.simulate (0, 10, 100);
 C1 = r.getCC ('J1', 'k1')
 C2 = r.getCC ('J1', 'k2')
@@ -40,8 +44,8 @@ print sum
 
 aC1 = 0; aC2 = 0; aC3 = 0; aC4 = 0;
 aC1a = []; aC2a = []; aC3a = []; aC4a = [];
-n = 5000
-upperLimitK = 50
+n = 1000
+upperLimitK = 10.
 for i in range (0,n):
     r.setValue ('k1', random.uniform(0, upperLimitK))
     r.setValue ('k2', random.uniform(0, upperLimitK))
@@ -63,12 +67,83 @@ for i in range (0,n):
     aC4a.append (C4)
 
 print aC1/n, aC2/n, aC3/n, aC4/n 
+#%%
+import seaborn as sb
 
 bins = 100
+temp=[0.72727262659, 0.18181612826, 0.0606048676996, 0.0303023522076]
 
-pl.hist(aC1a, bins=bins, histtype='stepfilled', normed=True, color='r', alpha=0.5, label='C1')
-pl.hist(aC2a, bins=bins, histtype='stepfilled', normed=True, color='b', alpha=0.5, label='C2')
-pl.hist(aC3a, bins=bins, histtype='stepfilled', normed=True, color='g', alpha=0.5, label='C3')
-pl.hist(aC4a, bins=bins, histtype='stepfilled', normed=True, color='y', alpha=0.5, label='C4')
+fig = plt.figure(figsize=(15,10))
+#frame = pylab.gca()
+pal = sb.color_palette("hls", 4)
 
-    
+sb.set_style("white")
+#frame.axes.get_yaxis().set_ticks([])
+#ax.tick_params('both', length=10, width=3, which='major')
+#ax.tick_params('both', length=10, width=3, which='minor')
+#ax.spines['top'].set_linewidth(3)
+#ax.spines['right'].set_linewidth(3)
+#ax.spines['left'].set_linewidth(3)
+#ax.spines['bottom'].set_linewidth(3)
+#plt.axis([0,1,0,25])
+ax = fig.add_subplot(111)
+ax.spines['top'].set_color('none')
+ax.spines['bottom'].set_color('none')
+ax.spines['left'].set_color('none')
+ax.spines['right'].set_color('none')
+ax.tick_params(labelcolor='w', top='off', bottom='off', left='off', right='off')
+ax.tick_params(axis='x', pad=30)
+ax.tick_params(axis='y', pad=10)
+
+
+ax1 = fig.add_subplot(2,2,1)
+plt.yticks(fontsize = 0)
+plt.xticks(fontsize = 40)
+plt.axis([0,1,0,4])
+plt.xticks(np.arange(0, 1.1, .5))
+ax1.annotate("k1", xy=(0.9, 3.5), xytext=(0.875, 3.4), fontsize=50)
+plt.hist(aC1a, bins=bins, histtype='stepfilled', normed=True, color=pal[0], label='C1')
+#plt.vlines(np.median(aC1a), 0, 4, color='r')
+#plt.vlines(temp[0], 0, 4, color='k')
+
+ax2 = fig.add_subplot(2,2,2)
+plt.yticks(fontsize = 0)
+plt.xticks(fontsize = 40)
+plt.axis([0,1,0,5])
+plt.xticks(np.arange(0, 1.1, .5))
+ax2.annotate("k2", xy=(0.9, 4.5), xytext=(0.875, 4.25), fontsize=50)
+plt.hist(aC2a, bins=bins, histtype='stepfilled', normed=True, color=pal[1], label='C2')
+#plt.vlines(np.median(aC2a), 0, 5, color='r')
+#plt.vlines(temp[1], 0, 5, color='k')
+
+ax3 = fig.add_subplot(2,2,3)
+plt.yticks(fontsize = 0)
+plt.xticks(fontsize = 40)
+plt.axis([0,.6,0,15])
+plt.xticks(np.arange(0, .61, .3))
+ax3.annotate("k3", xy=(0.5, 14.5), xytext=(0.525, 12.8), fontsize=50)
+plt.hist(aC3a, bins=bins, histtype='stepfilled', normed=True, color=pal[2], label='C3')
+#plt.vlines(np.median(aC3a), 0, 15, color='r')
+#plt.vlines(temp[2], 0, 15, color='k')
+
+ax4 = fig.add_subplot(2,2,4)
+plt.yticks(fontsize = 0)
+plt.xticks(fontsize = 40)
+plt.axis([0,.6,0,25])
+plt.xticks(np.arange(0, .61, .3))
+ax4.annotate("k4", xy=(0.5, 24.5), xytext=(0.525, 21.2), fontsize=50)
+plt.hist(aC4a, bins=bins, histtype='stepfilled', normed=True, color=pal[3], label='C4')
+#plt.vlines(np.median(aC4a), 0, 25, color='r')
+#plt.vlines(temp[3], 0, 25, color='k')
+
+plt.tight_layout(w_pad=3)
+#plt.axis([0,3,0.,1.7])
+#frame.axes.get_yaxis().set_ticks([])
+#ax.tick_params(axis='x', pad=20)
+ax.set_xlabel("Control Coefficients", fontsize=60)
+ax.set_ylabel("Normalized Frequency", fontsize=60)
+
+#fig.savefig(r'monte_no_vlines.eps', bbox_extra_artists=(), bbox_inches='tight', pad_inches=.2)
+#plt.xticks(np.arange(0, 1.1, .5))
+fig.set_dpi(1200)
+plt.show()
