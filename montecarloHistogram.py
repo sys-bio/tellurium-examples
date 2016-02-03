@@ -1,6 +1,8 @@
-# Monteo Carlo simulation of a stright chain pathway
-# Samples parameter values while keeping Keq constant
-# Plots the distribtution of control coefficients
+"""
+Monteo Carlo simulation of a stright chain pathway
+Samples parameter values while keeping Keq constant
+Plots the distribtution of control coefficients
+"""
 
 import tellurium as te
 import random
@@ -30,42 +32,42 @@ r = te.loada("""
 # Randomize
 np.random.seed(int(time.time()))
 
-m = r.simulate (0, 10, 100);
-C1 = r.getCC ('J1', 'k1')
-C2 = r.getCC ('J1', 'k2')
-C3 = r.getCC ('J1', 'k3')
-C4 = r.getCC ('J1', 'k4')
+m = r.simulate(0, 10, 100)
+C1 = r.getCC('J1', 'k1')
+C2 = r.getCC('J1', 'k2')
+C3 = r.getCC('J1', 'k3')
+C4 = r.getCC('J1', 'k4')
 
 print C1, C2, C3, C4
-sum = C1 + C2 + C3 + C4;
+sum = C1 + C2 + C3 + C4
 print sum
 
 # Initialize
 aC1 = 0; aC2 = 0; aC3 = 0; aC4 = 0;
 aC1a = []; aC2a = []; aC3a = []; aC4a = [];
-n = 1000 # Number of repetition
+n = 1000  # Number of repetition
 upperLimitK = 10.
 
 # Run simulation n times and calculate control coefficients each run
-for i in range (0,n):
-    r.setValue ('k1', random.uniform(0, upperLimitK))
-    r.setValue ('k2', random.uniform(0, upperLimitK))
-    r.setValue ('k3', random.uniform(0, upperLimitK))
-    r.setValue ('k4', random.uniform(0, upperLimitK))
+for i in range(0,n):
+    r.setValue('k1', random.uniform(0, upperLimitK))
+    r.setValue('k2', random.uniform(0, upperLimitK))
+    r.setValue('k3', random.uniform(0, upperLimitK))
+    r.setValue('k4', random.uniform(0, upperLimitK))
     r.simulate()    
     r.steadyState()
-    C1 = r.getCC ('J1', 'k1')
-    C2 = r.getCC ('J1', 'k2')
-    C3 = r.getCC ('J1', 'k3')
-    C4 = r.getCC ('J1', 'k4')
+    C1 = r.getCC('J1', 'k1')
+    C2 = r.getCC('J1', 'k2')
+    C3 = r.getCC('J1', 'k3')
+    C4 = r.getCC('J1', 'k4')
     aC1 = aC1 + C1
     aC2 = aC2 + C2
     aC3 = aC3 + C3
     aC4 = aC4 + C4
-    aC1a.append (C1)
-    aC2a.append (C2)
-    aC3a.append (C3)
-    aC4a.append (C4)
+    aC1a.append(C1)
+    aC2a.append(C2)
+    aC3a.append(C3)
+    aC4a.append(C4)
 
 print aC1/n, aC2/n, aC3/n, aC4/n 
 
@@ -84,32 +86,32 @@ ax.tick_params(axis='y', pad=0)
 
 
 ax1 = fig.add_subplot(2,2,1)
-plt.yticks(fontsize = 0)
-plt.xticks(fontsize = 20)
+plt.yticks(fontsize=0)
+plt.xticks(fontsize=20)
 plt.axis([0,1,0,4])
 plt.xticks(np.arange(0, 1.1, .5))
 ax1.annotate("k1", xy=(0.97, 3.5), xytext=(0.875, 3.4), fontsize=20)
 plt.hist(aC1a, bins=bins, histtype='stepfilled', normed=True, color='b', label='C1')
 
 ax2 = fig.add_subplot(2,2,2)
-plt.yticks(fontsize = 0)
-plt.xticks(fontsize = 20)
+plt.yticks(fontsize=0)
+plt.xticks(fontsize=20)
 plt.axis([0,1,0,5])
 plt.xticks(np.arange(0, 1.1, .5))
 ax2.annotate("k2", xy=(0.97, 4.5), xytext=(0.875, 4.25), fontsize=20)
 plt.hist(aC2a, bins=bins, histtype='stepfilled', normed=True, color='g', label='C2')
 
 ax3 = fig.add_subplot(2,2,3)
-plt.yticks(fontsize = 0)
-plt.xticks(fontsize = 20)
+plt.yticks(fontsize=0)
+plt.xticks(fontsize=20)
 plt.axis([0,.6,0,15])
 plt.xticks(np.arange(0, .61, .3))
 ax3.annotate("k3", xy=(0.54, 14.5), xytext=(0.525, 12.8), fontsize=20)
 plt.hist(aC3a, bins=bins, histtype='stepfilled', normed=True, color='r', label='C3')
 
 ax4 = fig.add_subplot(2,2,4)
-plt.yticks(fontsize = 0)
-plt.xticks(fontsize = 20)
+plt.yticks(fontsize=0)
+plt.xticks(fontsize=20)
 plt.axis([0,.6,0,25])
 plt.xticks(np.arange(0, .61, .3))
 ax4.annotate("k4", xy=(0.54, 24.5), xytext=(0.525, 21.2), fontsize=20)

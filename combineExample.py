@@ -1,7 +1,8 @@
-# This script shows how to export antimony and phrasedml strings to
-# combine archive. The script creates an omex file called 'combineexport'
-# to the same directory that this script is located.
-
+"""
+This script shows how to export antimony and phrasedml strings to
+combine archive. The script creates an omex file called 'combineexport'
+to the same directory that this script is located.
+"""
 import tellurium as te
 
 antstr = '''

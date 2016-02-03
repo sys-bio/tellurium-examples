@@ -1,9 +1,10 @@
-# This script shows how to export run parameter scan and plot the output 
-# as a surface plot.
-
+"""
+This script shows how to export run parameter scan and plot the output
+as a surface plot.
+"""
 import tellurium as te
 
-cell = '''
+model = '''
     $Xo -> S1; vo;
     S1 -> S2; k1*S1 - k2*S2;
     S2 -> $X1; k3*S2;
@@ -13,7 +14,7 @@ cell = '''
     Xo = 0; S1 = 0; S2 = 0; X1 = 0;
 '''
 
-rr = te.loadAntimonyModel(cell)
+rr = te.loada(model)
 p = te.ParameterScan.ParameterScan(rr)
 
 p.startTime = 0

@@ -1,4 +1,6 @@
-# This script performs bifucation analysis on embryonic stem cell model
+"""
+This script performs bifucation analysis on embryonic stem cell model
+"""
 
 from teplugins import *
 import matplotlib.pyplot as plt
