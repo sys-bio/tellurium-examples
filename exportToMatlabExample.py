@@ -14,4 +14,4 @@ r = te.loada('''
 ''')
 
 # Export model as a Matlab function
-te.exportToMatlab(r, r'.\model.m')
+r.exportToMatlab(r'.\model.m')
