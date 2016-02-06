@@ -4,6 +4,7 @@ The script creates a file called 'model.m' to the same directory that
 this script is located.
 """
 import tellurium as te
+import os.path
 
 r = te.loada('''
     $Xo -> S1; vo;
@@ -15,4 +16,4 @@ r = te.loada('''
 ''')
 
 # Export model as a Matlab function
-r.exportToMatlab(r'.\model.m')
+r.exportToMatlab(os.path.join('.', 'model.m'))

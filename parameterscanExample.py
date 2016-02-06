@@ -15,19 +15,17 @@ model = '''
 '''
 
 rr = te.loada(model)
-p = te.ParameterScan.ParameterScan(rr)
-
-p.startTime = 0
-p.endTime = 6
-p.numberOfPoints = 50
-p.startValue = 1
-p.endValue = 5
-
-p.independent = ["Time", "k1"]
-p.dependent = "S1"
-
-p.xlabel = "Time"
-p.ylabel = r"$k_{1}$"
-p.zlabel = r"$S_{1}$"
+p = te.ParameterScan(rr,
+    startTime=0,
+    endTime=6,
+    numberOfPoints=50,
+    startValue=1,
+    endValue=5,
+    independent=["Time", "k1"],
+    dependent="S1",
+    xlabel="Time",
+    ylabel=r"$k_{1}$",
+    zlabel=r"$S_{1}$"                                  
+)
 
 p.plotSurface()

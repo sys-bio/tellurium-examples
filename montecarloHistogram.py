@@ -49,7 +49,7 @@ n = 1000  # Number of repetition
 upperLimitK = 10.
 
 # Run simulation n times and calculate control coefficients each run
-for i in range(0,n):
+for i in range(0, n):
     r.setValue('k1', random.uniform(0, upperLimitK))
     r.setValue('k2', random.uniform(0, upperLimitK))
     r.setValue('k3', random.uniform(0, upperLimitK))

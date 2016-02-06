@@ -18,13 +18,14 @@ r = te.loada('''
 ''')
 
 result = r.simulate(0, 6, 100)
-r.plot()
 
-p = te.Export.export(r)
-p.color = ['blue', 'green']  # Set color
-p.legend = ['S1', 'S2']  # Set legend
-p.xlabel = 'Time'  # X label name
-p.ylabel = 'Concentration'  # Y label name
-p.exportComplete = True
-p.saveto = './'
+p = te.LatexExport(r,
+    color=['blue', 'green'],
+    legend=['S1', 'S2'],
+    xlabel='Time',
+    ylabel='Concentration',
+    exportComplete=True,
+    saveto='./'
+)
+
 p.saveToFile(result)
