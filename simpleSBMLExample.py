@@ -3,6 +3,7 @@ An example script of using simpleSBML package to create SBML string.
 simpleSBML creates valid SBML strings in a simple and fast manner.
 """
 import simplesbml
+import roadrunner
 
 m = simplesbml.sbmlModel()
 
@@ -25,5 +26,6 @@ m.addReaction("[X2]", "[X3]", "k3*X2")
 # Convert to SBML string
 sbmlStr = m.toSBML()
 
-# Print SBML
-print(sbmlStr)
+# Reload SBML model and translate it to Antimony
+rr = roadrunner.RoadRunner(sbmlStr)
+print(rr.getAntimony())
