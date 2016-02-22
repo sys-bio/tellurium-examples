@@ -1,6 +1,5 @@
 """
-This script shows how to export run parameter scan and plot the output
-as a surface plot.
+This script shows how to export run parameter scan and plot the output.
 """
 import tellurium as te
 
