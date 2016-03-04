@@ -20,7 +20,7 @@ phrastr = '''
   plot "Figure 1" time vs S1, S2
 '''
 
-exp = te.experiment(antstr, phrastr)
+exp = te.experiment([antstr], [phrastr])
 
 # Export as combine archive
 exp.exportAsCombine('./combineexport.omex') 

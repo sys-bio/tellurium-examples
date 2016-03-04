@@ -69,7 +69,7 @@ end
 PhrasedMLstr = '''
 // Created by libphrasedml v0.5beta
 // Models
-model1 = model ".\BorisEJB.xml"
+model1 = model "BorisEJB"
 
 // Simulations
 timecourse1 = simulate uniform(0, 9000, 9000)
@@ -83,6 +83,6 @@ plot "Figure 5A" time vs MAPK, MAPK_PP
 
 import tellurium as te
 
-exp = te.experiment(AntimonyModel, PhrasedMLstr)
-exp.execute()
+exp = te.experiment([AntimonyModel], [PhrasedMLstr])
+exp.execute(PhrasedMLstr)
 exp.exportAsCombine('./BorisEJB.omex')

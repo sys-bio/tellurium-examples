@@ -1,7 +1,7 @@
 """
 This script shows how to export plots produced from roadrunner to Latex.
-The script creates three text files: 'Model_code.txt', 'Model_data1.txt',
-'Model_data2.txt'. 'Model_code.txt' contains Latex script that can be
+The script creates three files: 'Model_code.tex', 'Model_data1.txt',
+'Model_data2.txt'. 'Model_code.tex' contains Latex script that can be
 compiled to get a pdf file using pgfplots package. Other two files contain
 data points to plot the figure for species S1 and S2. The script will create
 files to the same directory that this script is located.
