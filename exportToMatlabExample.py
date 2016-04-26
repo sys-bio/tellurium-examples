@@ -1,6 +1,6 @@
 """
 This script shows how to export models into executable MATLAB .m file.
-The script creates a file called 'main.m' to the same directory that
+The script creates a file called 'testmodel.m' to the same directory that
 this script is located.
 """
 import tellurium as te
