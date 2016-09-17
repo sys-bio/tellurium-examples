@@ -28,4 +28,4 @@ sbmlStr = m.toSBML()
 
 # Reload SBML model and translate it to Antimony
 rr = roadrunner.RoadRunner(sbmlStr)
-print(rr.getAntimony())
+print(rr.getSBML())
