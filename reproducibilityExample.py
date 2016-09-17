@@ -175,7 +175,6 @@ plot "Figure 5B" time vs MAPK, MAPK_PP
 import tellurium as te
 
 rr = te.loada(AntimonyModel)
-rr.draw(width=300)
 
 exp = te.experiment(AntimonyModel, PhrasedMLstr)
 exp.execute(PhrasedMLstr)
