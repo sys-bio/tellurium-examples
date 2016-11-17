@@ -3,10 +3,7 @@ This script performs bifucation analysis on embryonic stem cell model
 """
 import platform
 
-if 'darwin' in platform.system().lower():
-    from rrplugins import *
-else:
-    from teplugins import *
+from rrplugins import *
 import matplotlib.pyplot as plt
 
 sbmlModel ="BIOMD0000000203.xml"                              
